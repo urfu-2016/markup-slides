@@ -1,0 +1,382 @@
+.reveal
+{
+    font-family: yandex-sans;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4
+{
+    font-family: yandex-sans-display, Arial, sans-serif;
+}
+
+mark
+{
+    background: #ffee58;
+}
+
+mark.red
+{
+    background: #ff5722;
+}
+
+mark.green
+{
+    background: #8bc34a;
+}
+
+mark.blue
+{
+    background: #268bd2;
+}
+
+.text-color-blue
+{
+    color: #268bd2
+}
+
+.text-color-red
+{
+    color: #ff5722
+}
+
+.text-color-green
+{
+    color: #8bc34a
+}
+
+section .strike
+{
+    text-decoration: line-through;
+    color: #888;
+}
+
+.yandex table.tableMiddle td
+{
+    vertical-align: middle;
+}
+
+.yandex table.tableCenter td
+{
+    text-align: center;
+}
+
+.yandex table.noBorder td
+{
+    border: none;
+}
+
+.reveal pre code
+{
+    max-height: 500px;
+}
+
+.reveal pre
+{
+    width: 100%;
+    font-size: 26px;
+    font-family: 'sourcecodepro-light' !important;
+    
+    margin: 10px 15px !important;
+    box-shadow: none;
+}
+
+pre.size-s
+{
+    font-size: 15px !important;
+}
+
+pre.size-m,
+pre.m
+{
+    font-size: 25px !important;
+}
+
+pre.size-l,
+pre.l
+{
+    font-size: 30px !important;
+}
+
+pre.size-xl,
+pre.xl
+{
+    font-size: 35px !important;
+}
+
+pre.size-xml
+{
+    font-size: 38px !important;
+}
+
+pre.size-xxl
+{
+    font-size: 40px !important;
+}
+
+.typed-cursor
+{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink
+{
+    0%
+    {
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes blink
+{
+    0%
+    {
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes blink
+{
+    0%
+    {
+        opacity: 1;
+    }
+    50%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+.reveal code
+{
+    font-family: 'sourcecodepro-light' !important;
+    padding: 10px 0 !important;
+    line-height: 35px !important;
+    border: 3px solid rgba(63, 63, 63, 0.4) !important;
+    background: rgba(63, 63, 63, 0.25) !important;
+    max-height: 100% !important;
+}
+
+pre code mark,
+mark
+{
+    border-radius: 4px;
+    color: #000;
+}
+
+pre code mark *
+{
+    color: #000 !important;
+    
+}
+
+.ex a
+{
+    color: #268bd2;
+    text-decoration: underline;
+}
+
+.ex img
+{
+    all: unset !important;
+}
+
+.reveal section.ex
+{
+    text-align: start;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 20px 10px;
+    border: 0;
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, .5);
+}
+
+.reveal section.ex::before
+{
+    content: 'EXAMPLE';
+    position: absolute;
+    color: #000;
+    bottom: 21px;
+    right: -59px;
+    transform: rotate(-45deg);
+    background: #fff;
+    padding: 5px 53px;
+    font-size: 21px;
+}
+
+.reveal .slide-number
+{
+    font-size: 30px;
+}
+
+.reveal img
+{
+    background: none
+}
+
+.reveal .progress span
+{
+    background: #268bd2;
+}
+
+.reveal .progress
+{
+    height: 10px;
+}
+
+/*========Ниже идут кастомные стили=======*/
+.universal
+{
+    border: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateY(300%);
+    transition: transform .5s ease;
+}
+
+.visible.universal
+{
+    transform: translateY(0%);
+}
+
+.ex table,
+.ex table th,
+.ex table td
+{
+    border: 1px solid #fff;
+}
+
+.show-mathml ~ pre
+{
+    transition: transform .8s linear;
+}
+
+.show-mathml ~ .math-container
+{
+    transition: transform .8s linear;
+    visibility: hidden;
+    transform: scale(0.1);
+}
+
+.show-mathml.visible ~ pre
+{
+    transform: scale(0.6) translate(-40%, -40%);
+}
+
+.show-mathml.visible ~ .math-container
+{
+    transform: scale(1) translate(0, -150%);
+    visibility: visible;
+}
+
+.years td
+{
+    font-size: 50px !important;
+}
+
+.myths .m1.visible ~ ol .mm1,
+.myths .m2.visible ~ ol .mm2,
+.myths .m3.visible ~ ol .mm3
+{
+    text-decoration: line-through;
+}
+
+.ex.full
+{
+    height: 100%;
+}
+
+.cat
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /*transition: transform .3s linear 2s;*/
+    transform: translateY(100%);
+}
+
+.present .cat
+{
+    animation: cat 2s ease 1s alternate 2;
+}
+
+@keyframes cat
+{
+    50%
+    {
+        transform: translateY(40%);
+        
+    }
+    
+    100%
+    {
+        transform: translateY(100%);
+    }
+}
+
+.deprecated
+{
+    width: 100%;
+    height: 100%;
+    background: url(../img/deprecated.png);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: .2s transform;
+    transform: scale(2);
+}
+
+.deprecated.visible
+{
+    transform: scale(1);
+}
+
+.reveal .slides section mark.fragment
+{
+    background: transparent;
+    visibility: visible;
+    color: #fff;
+    opacity: 1;
+}
+
+.reveal .slides section mark.fragment.toggle.visible
+{
+    color: #fff;
+    background: transparent;
+}
+
+.reveal .slides section mark.fragment.visible.current-fragment.toggle,
+.reveal .slides section mark.fragment.visible
+{
+    background: #ffee58;
+    color: #000;
+}
+
