@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .left {
+            width: 49%;
+        }
+        .right {
+            width: 50%;
+        }
+        .left,
+        .right {
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+<div class="left">
+    <h1  class="notranslate" translate="no">translate="no"</h1>
+
+    <h1 translate="no">Using HTML's <span class="notranslate" translate="no">translate</span> attribute</h1>
+
+    <p>Как говорил Джон Леннон</p>
+    <blockquote  class="notranslate" translate="no">Life is what happens to you while you’re busy making other plans.</blockquote>
+    <code  class="notranslate" translate="no">
+        console.log('Hello world');
+    </code>
+    <br>
+    <img width="300" class="notranslate" src="img/cats.jpg" alt="cats" title="cats" translate="no">
+</div>
+<div class="right">
+    <h1>translate="yes"</h1>
+
+    <h1 translate="yes">Using HTML's <span>translate</span> attribute</h1>
+
+    <p>Как говорил Джон Леннон</p>
+    <blockquote translate="yes">Life is what happens to you while you’re busy making other plans.</blockquote>
+    <code translate="yes">
+        console.log('Hello world');
+    </code>
+    <br>
+    <img width="300" src="img/cats.jpg" alt="cats" title="cats" translate="yes">
+</div>
+</body>
+</html>
