@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Модель отображения</title>
+
+    <meta name="description" content="Лекция #5 по курсу «вёрстка». Модель отображения-1">
+    <meta name="author" content="Олег Мохов, Артём Кувалдин">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../lib/css/animate.css">
+    <link rel="stylesheet" href="../css/theme/night.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <link rel="stylesheet" href="css-custom/custom.css">
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <script type="text/javascript"
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <div class="slides">
+        <section style="font-size: 70px;">
+            <div class="fragment">
+                <h1 class="animated" style="font-size: 140px;">Модель отображения. Часть 1</h1>
+
+                <p style="text-align: center;">
+                    <small class=" animated"><span style="color: red">М</span>охов Олег</small><br>
+                    <small class=" animated"><span style="color: red">Р</span>азработчик интерфейсов</small>
+                </p>
+            </div>
+        </section>
+        <section data-background-transition="zoom" data-background-image="img/01-pixels.jpg">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Всё есть <span style="text-decoration: line-through;">квадраты</span> прямоугольники</h1>
+        </section>
+        <section data-transition="none" data-background-image="img/02-yandex.png">
+            <!--<h1 style="text-shadow: #000 3px 2px 2px;">Всё есть квадраты</h1>-->
+        </section>
+        <section data-transition="none" data-background-image="img/03-yandex-outline.png">
+            <!--<h1 style="text-shadow: #000 3px 2px 2px;">Всё есть квадраты</h1>-->
+        </section>
+        <section data-transition="none">
+            <img src="img/04-box-content.png"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/05-box-padding.png"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/06-box-border.png"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/07-box-margin.png"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/08-box-notall.png"/>
+        </section>
+
+        <section data-transition="none">
+            <img src="img/09-box-notall2.png"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/11-box-different-01.png"/>
+        </section>
+        <section data-background-image="img/14-cat-box.jpg">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Визуальная модель форматирования</h1>
+        </section>
+        <section>
+            <h2>Что это такое?</h2>
+            <p>Алгоритм, который используется для обработки документа и отображения его визуального представления. Каждый элемент документа трансформируется 0, 1 или более box'ов в соответствие с боксовой моделью CSS.</p>
+            <p class="fragment">Визуальная модель форматирования определяет как страница будет отрендерена.</p>
+            <div class="fragment">
+                <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Visual_formatting_model">MDN::Visual formatting model</a>
+            </div>
+        </section>
+        <section>
+            <h2>Положение бокса</h2>
+            <ul>
+                <li>размер бокса: определен ли, ограничен или никак не задан</li>
+                <li class="fragment">тип бокса: inline, block, и т.п</li>
+                <li class="fragment">положение относительно других элементов в дереве: соседей или детей</li>
+                <li class="fragment">размер и положение viewport'а</li>
+                <li class="fragment">внутренние пропорции (картинки, видео)</li>
+                <li class="fragment">схема позиционирования: поток, float или абсолютная</li>
+            </ul>
+        </section>
+        <section>
+            <h1 style="text-shadow: #000 3px 2px 2px;">Создание боксов</h1>
+        </section>
+        <section>
+            <h2>Типы боксов</h2>
+            <ul>
+                <li class="fragment" data-fragment-index="1">Блочного уровня <span class="fragment" data-fragment-index="2">(это не только display: block)</span></li>
+                <li class="fragment" data-fragment-index="3">Строчного (inline) уровня</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Боксы блочного уровня</h2>
+            <ul>
+                <li>Элемент рендерится как блок (близкая аналогия – параграф)</li>
+                <li class="fragment">Элементы блочного уровня выстраиваются сверху внизу</li>
+                <li class="fragment">Элемент блочного уровня участвует в блочном контексте форматирования</li>
+                <li class="fragment">Элемент блочного уровня генерирует главный бокс блочного уровня (principal block-level box) и в некоторых случаях дополнительные (например list-item генерирует бокс для буллета)</li>
+                <li class="fragment">Участвующий в блочном контексте форматирования элемент может создать вокруг себя анонимный блочный бокс</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Анонимные боксы</h2>
+                <pre class="html size-l">
+<code><div>
+Некий текст
+<p>с параграфом
+внутри</p>
+и снова текст.</div></code></pre>
+            <div class="fragment" data-fragment-index="1" style="text-align: left">
+                <div><mark class="fragment blue" data-fragment-index="3">Некий текст</mark><p><mark class="fragment" data-fragment-index="2">с параграфом внутри</mark></p><mark class="fragment blue" data-fragment-index="3">и снова текст.</mark></div>
+            </div>
+        </section>
+        <section>
+            <h2>Боксы блочного уровня<br/> по-умолчанию</h2>
+            <ul>
+                <li>p</li>
+                <li>div</li>
+                <li>h1, h2, h3, h4, h5, h6</li>
+                <li>ol, ul</li>
+                <li>pre</li>
+                <li>address</li>
+                <li>blockquote</li>
+                <li>dl</li>
+                <li>fieldset</li>
+                <li>form</li>
+                <li>hr</li>
+                <li>table</li>
+                <li>display: block, list-item, table, flex...</li>
+            </ul>
+        </section>
+        <section>
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">Математика block элементов</h1>
+        </section>
+
+        <section data-transition="none">
+            <input type="hidden" class="fragment animate-small" data-fragment-index="1" />
+            <img height=500 src="img/19-margin-math1.png"/>
+            <div style="overflow: hidden;" class="fragment" data-fragment-index="2"><pre class="hljs css size-l"><code data-noescape><span class="fragment" data-fragment-index="2">margin-left</span> +<span class="fragment" data-fragment-index="8"> /* css */</span>
+<span class="fragment" data-fragment-index="3">border-left +</span><span class="fragment" data-fragment-index="8"> /* css */</span>
+<span class="fragment" data-fragment-index="4">padding-left +</span><span class="fragment" data-fragment-index="8"> /* css */</span>
+<span class="fragment" data-fragment-index="5"><mark class="fragment red" data-fragment-index="7">content-width</mark> +</span><span class="fragment" data-fragment-index="9"> /* ≠ width (css) */</span>
+<span class="fragment" data-fragment-index="4">padding-right +</span><span class="fragment" data-fragment-index="8"> /* css */</span>
+<span class="fragment" data-fragment-index="3">border-right +</span><span class="fragment" data-fragment-index="8"> /* css */</span>
+<span class="fragment" data-fragment-index="2">margin-right</span><span class="fragment" data-fragment-index="8"> /* css */</span>
+<span class="fragment" data-fragment-index="6">= width содержащего блока</span></pre></code></div>
+        </section>
+
+        <section>
+            <h2>box-sizing</h2>
+            <p>CSS свойство, которое применяется для изменения алгоритма расчета ширины и высоты элемента.</p>
+        </section>
+
+        <section data-transition="none" style="font-size: 80%">
+            <div>margin + border + padding + width = width содержащего блока <span class="fragment">при <mark>content-box</mark></span></div>
+            <img src="img/20-margin-math2.png"/>
+        </section>
+        <section data-transition="none" style="font-size: 80%">
+            <div>margin + border + width = width содержащего блока при <mark>padding-box</mark></div>
+            <img src="img/21-margin-math3.png"/>
+        </section>
+        <section data-transition="none" style="font-size: 80%">
+            <div>margin + width = width содержащего блока при <mark>border-box</mark></div>
+            <img src="img/22-margin-math4.png"/>
+        </section>
+        <section data-transition="none" style="font-size: 80%">
+            <div>margin + border + padding + height ≠ height содержащего блока</div>
+            <img src="img/23-height.png"/>
+        </section>
+
+
+
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 200px;
+    height: 200px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 200px; height: 200px"></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 200px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 200px"></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 100px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 100px"></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 100px;
+}
+div div {
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 100px"><div style="color: #fff; background: rgba(0, 0, 255, 0.5);">Вместо тепла - зелень стекла<br>Вместо огня - дым</div></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 100px;
+}
+div div {
+    margin: 0 20px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 100px"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 0 20px;">Из сетки календаря выхвачен день</div></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 100px;
+}
+div div {
+    margin: 0 20px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 100px"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 0 20px">Красное солнце сгорает дотла<br>
+                День догорает с ним,<br>
+                На пылающий город падает тень.</div></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 100px;
+}
+div div {
+    height: 100px;
+    margin: 0 20px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 100px"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 0 20px; height: 100px;">Перемен! - требуют наши сердца.<br>
+                Перемен! - требуют наши глаза<br></div></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 400px;
+    height: 100px;
+}
+div div {
+    height: 100px;
+    margin: 0 20px;
+    width: 800px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 400px; height: 100px"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 0 20px; height: 100px; width: 800px;">В нашем смехе и в наших слезах, и в пульсации вен:<br>
+                «Перемен! Мы ждем перемен!»</div></div>
+        </section>
+        <section data-transition="none">
+            <h2>Ширина и высота</h2>
+                <pre class="css size-l"><code>
+div {
+    height: 100px;
+}
+div div {
+    height: 100px;
+    margin: 0 20px;
+    max-width: 800px;
+}
+                </code></pre>
+            <style>
+                @keyframes bigger {
+                    0% { width: 400px; }
+                    100% { width: 1000px;}
+                }
+            </style>
+
+            <div style="background: red; width: 400px; animation-name: bigger; animation-duration: 2s;  animation-iteration-count: infinite; animation-direction: alternate; height: 100px"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 0 20px; height: 100px; max-width: 800px;">Электрический свет продолжает наш день,<br>
+                И коробка от спичек пуста,<br>
+                Но на кухне синим цветком горит газ.</div></div>
+        </section>
+        <section data-transition="none">
+            <h2>margin/padding</h2>
+                <pre class="css size-l"><code>
+div {
+    width: 800px;
+}
+div div {
+    margin: 20px;
+    padding: 50px;
+}
+                </code></pre>
+
+            <div style="background: red; width: 900px;"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 20px; padding: 50px;">Сигареты в руках, чай на столе - эта схема проста,<br>
+                И больше нет ничего, все находится в нас.</div></div>
+        </section>
+
+        <section data-transition="none">
+            <h2>margin/padding</h2>
+            <img src="img/12-clock.jpg"/>
+        </section>
+        <section data-transition="none">
+            <h2>margin/padding</h2>
+                <pre class="css size-l">
+<code>        top    right   bottom   left</code>
+<code>margin: 2px    30px    400px    5000px;</code>
+<code class="fragment">margin: 2px    30px    400px /* 30px */;</code>
+<code class="fragment">margin: 2px    30px /* 2px      30px */;</code>
+<code class="fragment">margin: 2px /* 2px     2px      2px  */;</code>
+                </pre>
+        </section>
+        <section data-transition="none">
+            <h2>margin/padding</h2>
+                <pre class="css size-l">
+<code>margin: 2px 30px 400px 5000px;</code>
+<code class="fragment">margin-top: 2px;
+margin-right: 30px;
+margin-bottom: 400px;
+margin-left: 5000px;
+</code>
+                </pre>
+        </section>
+        <section>
+            <h1>Процентные значения</h1>
+        </section>
+
+        <section data-transition="none" style="font-size: 80%">
+            <h2>Процентные значения</h2>
+            <ul>
+                <li>ширина, заданная в процентах, считается относительно ширины содержащего блока</li>
+                <li>высота, заданная в процентах, считается относительно высоты содержащего блока, но только если она задана явно</li>
+                <li>margin-left/right и padding-left/right, заданная в процентах, считаются относительно ширины содержащего блока</li>
+                <li>высота содержащего блока (если не задана) = сумма места, занимаемого его детьми</li>
+                <li class="fragment">margin-top/bottom и padding-top/bottom, заданная в процентах, считаются относительно ширины содержащего блока</li>
+            </ul>
+        </section>
+
+        <section data-transition="none">
+                <pre class="css size-l"><code>
+div div {
+    height: 50%;
+    width: 50%;
+}
+                </code></pre>
+            <div style="background: red; border: 1px solid white;"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); height: 50%; width: 50%;">Перемен требуют наши сердца<br>
+                Перемен требуют наши глаза
+            </div></div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-l"><code>
+div {
+    height: 400px;
+}
+div div {
+    height: 50%;
+    width: 50%;
+}
+                </code></pre>
+            <div style="background: red; height: 400px; border: 1px solid white;"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); height: 50%; width: 50%;">В нашем смехе и в наших слезах<br>
+                И в пульсации вен<br>
+                Перемен, мы ждём перемен
+            </div></div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-l"><code>
+div div {
+    margin: 10%;
+    padding: 10%;
+}
+                </code></pre>
+            <div style="background: red; width: 800px; height: 400px; border: 1px solid white; animation-name: bigger; animation-duration: 2s;  animation-iteration-count: infinite; animation-direction: alternate;"><div style="color: #fff; background: rgba(0, 0, 255, 0.5); margin: 10%; padding: 10%;">Мы не можем похвастаться мудростью глаз<br>
+                И умелыми жестами рук
+            </div></div>
+        </section>
+
+        <section>
+            <h1 style="text-shadow: #000 3px 2px 2px;">border</h1>
+        </section>
+
+        <section data-transition="none">
+            <h2>border</h2>
+                <pre class="css size-l"><code>
+border: <размер> <тип> <цвет>;</code>
+<code class="fragment">border-left: <размер> <тип> <цвет>;</code>
+<code class="fragment">border-width: <размер> <размер> <размер> <размер>;
+border-type: <тип> <тип> <тип> <тип>;
+border-color: <цвет> <цвет> <цвет> <цвет>;</code>
+<code class="fragment">border-left-width: <размер>;
+border-left-type: <тип>;
+border-left-color: <цвет>;</code>
+</pre>
+        </section>
+
+        <section data-transition="none">
+            <h2>border</h2>
+                <pre class="css size-l"><code>
+div {
+    border: 20px dotted blue;
+}
+                </code></pre>
+
+            <div style="color: #fff; border: 20px dotted blue;">Нам не нужно всё это, чтобы друг друга понять<br>
+                Сигареты в руках, чай на столе</div>
+        </section>
+
+        <section data-transition="none">
+            <h2>border</h2>
+                <pre class="css size-l"><code>
+div {
+    border: 20px dashed blue;
+}
+                </code></pre>
+
+            <div style="color: #fff; border: 20px dashed blue;">Так замыкается круг<br>
+                И вдруг нам становится страшно что-то менят</div>
+        </section>
+        <section data-transition="none">
+            <h2>border</h2>
+                <pre class="css size-l"><code>
+div {
+    border: 20px solid blue;
+}
+                </code></pre>
+
+            <div style="color: #fff; border: 20px solid blue;">Перемен требуют наши сердца<br>
+                Перемен требуют наши глаза</div>
+        </section>
+        <section data-transition="none">
+            <h2>border</h2>
+                <pre class="css size-l"><code>
+div {
+    border-width: 20px;
+    border-style: solid;
+    border-color: blue red;
+}
+                </code></pre>
+
+            <div style="color: #fff; border-width: 20px; border-style: solid; border-color: blue red;">В нашем смехе и в наших слезах<br>
+                И в пульсации вен</div>
+        </section>
+        <section data-transition="none">
+            <h2>border</h2>
+                <pre class="css size-l"><code>
+div {
+    border-width: 20px 40px;
+    border-style: solid dashed dotted;
+    border-color: blue red;
+}
+                </code></pre>
+
+            <div style="color: #fff; border-width: 20px 40px; border-style: solid dashed dotted; border-color: blue red;">Перемен, мы ждём перемен</div>
+        </section>
+        <section data-transition="none">
+            <h3>Немного о математике блочных элементов</h3>
+            <ul>
+                <li>margin + border + padding + width = <br/>width содержащего блока</li>
+                <li class="fragment">margin + width = <br/>width содержащего блока - border - padding</li>
+                <li class="fragment">border/padding: либо заданы, либо auto = 0</li>
+                <li class="fragment">если margin-left не задан, значит он равен 0, если margin-left задан в auto, то он вычисляется</li>
+                <li class="fragment">width либо задан, либо вычисляется</li>
+                <li class="fragment">margin-right вычисляется всегда, если заданы width и margin-right</li>
+            </ul>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.container { width: 666px; background: red; padding: 10px 0;  }</code>
+<code>.inner { background: rgba(0, 0, 255, 0.5) } </code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); height: 50px"></div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.container { width: 666px; background: red; padding: 10px 0;  }</code>
+<code>.inner { background: rgba(0, 0, 255, 0.5) } </code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5);"><span style="white-space: nowrap;">Теплое место, но улицы ждут отпечатков наших ног. Звездная пыль - на сапогах.</span>
+
+                    Мягкое кресло, клетчатый плед,<br>
+                    Не нажатый вовремя курок.<br>
+                    Солнечный день - в ослепительных снах..</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { margin-left: 500px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); margin-left: 500px">Группа крови</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { margin-left: 500px; margin-right: 66px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); margin-left: 500px; margin-right: 66px;">на рукаве</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { width: 300px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); width: 300px;">Мой порядковый номер</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { width: 300px; margin-right: 0; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); width: 300px; margin-right: 0;">на рукаве</div>
+            </div>
+            <h4 class="fragment" style="text-align: left; margin-top: 30px;">если margin-left не задан, значит он равен 0, если margin-left задан в auto, то он вычисляется</h4>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { width: 300px; margin-left: auto } </code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); width: 300px; margin-left: auto;">Пожелай мне удачи в бою</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { width: 300px; margin: 0 auto } </code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); width: 300px; margin: 0 auto;">пожелай мне</div>
+            </div>
+        </section>
+
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { margin-right: -100px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); margin-right: -100px; text-align: right">Не остаться в этой траве</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { margin-right: -100px; margin-left: -100px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); margin-right: -100px;margin-left: -100px; text-align: left">Не остаться в этой траве</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { width: 50%; margin-left: -100px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); width: 50%; margin-left: -100px; text-align: left">Пожелай мне удачи,</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h4>margin + width = width содержащего блока - border - padding</h4>
+                <pre class="css size-m">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner { width: 50%; margin-left: auto; margin-right: -100px; }</code>
+                </pre>
+            <div style="background: red; padding: 10px 0; width: 666px;">
+                <div style="background: rgba(0, 0, 255, 0.5); width: 50%; margin-left: auto; margin-right: -100px; text-align: left">Пожелай мне удачи!</div>
+            </div>
+        </section>
+
+        <section>
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">Схлопывание отступов</h1>
+        </section>
+
+        <section data-transition="none">
+            <h2>Схлопывание отступов</h2>
+                <pre class="css size-m">
+<code data-fragment-index="1" class="fragment">.first { margin-bottom: 30px; }</code>
+<code data-fragment-index="2" class="fragment">.second { margin-top: 60px; }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-around; color: #000;">
+                <div style="width: 30%">
+                    <h3 class="fragment" data-fragment-index="1">Блоки</h3>
+                    <div data-fragment-index="1" class="fragment" style="background: red; padding-bottom: 30px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >И есть чем платить, но я не хочу</div>
+                    </div>
+
+                    <div data-fragment-index="2" class="fragment" style="background: red; margin-top: 10px; padding-top: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Победы любой ценой</div>
+                    </div>
+                </div>
+                <div data-fragment-index="3"  class="fragment" style="width: 30%">
+                    <h3>Ожидание</h3>
+                    <div style="background: red; padding-bottom: 30px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >И есть чем платить, но я не хочу</div>
+                    </div>
+
+                    <div style="background: red; padding-top: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Победы любой ценой</div>
+                    </div>
+                </div>
+                <div data-fragment-index="4"  class="fragment" style="width: 30%">
+                    <h3>Реальность</h3>
+                    <div style="background: red; padding-bottom: 30px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >И есть чем платить, но я не хочу</div>
+                    </div>
+
+                    <div style="background: red; margin-top: -30px; padding-top: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Победы любой ценой</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-m">
+<code class="fragment" data-fragment-index="1">.inner { margin-top: 30px; }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-around;">
+                <div style="width: 30%">
+                    <h3>Блоки</h3>
+                    <div style="background: #A0C4E8; height: 200px;" ></div>
+
+                    <div class="fragment" data-fragment-index="1" style="margin-top: 30px; background: rgba(255,0,0,0.5)">Я никому не хочу ставить ногу на грудь.</div>
+                </div>
+                <div class="fragment" data-fragment-index="2" style="width: 30%">
+                    <h3>Ожидание</h3>
+                    <div style="padding-top: 30px; background: #A0C4E8; height: 200px;" ><div style="background: rgba(255,0,0,0.5)">Я никому не хочу ставить ногу на грудь.</div></div>
+                </div>
+                <div class="fragment" data-fragment-index="3" style="width: 30%">
+                    <h3>Реальность</h3>
+                    <div style="margin-top: 30px; background: #A0C4E8; height: 200px;" ><div style="background: rgba(255,0,0,0.5)">Я никому не хочу ставить ногу на грудь.</div></div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Высчитывание результирующего margin'а</h2>
+            <div>Если у двух блочных элементов, принадлежащих одному контексту форматирования, пересекаются margin'ы, то</div>
+            <ol style="margin-bottom: 30px;">
+                <li>Берутся максимальный и минимальный среди всех margin'ов</li>
+                <li>Если максимальный &lt; 0, то максимум &mdash; 0.  То же самое с минимумом</li>
+                <li>Результирующий margin = max + min</li>
+            </ol>
+            <div class="foot-link"><a href="http://www.w3.org/TR/CSS2/box.html#collapsing-margins">http://www.w3.org/TR/CSS2/box.html#collapsing-margins</a></div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-m">
+<code>.first { margin-bottom: 60px; }</code>
+<code>.second { margin-top: 100px; }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-around; color: #000;">
+                <div style="width: 30%">
+                    <div style="background: red; padding-bottom: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Я хотел бы остаться с тобой,<br>
+                            Просто остаться с тобой,</div>
+                    </div>
+
+                    <div style="background: red; margin-top: 10px; padding-top: 100px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Но высокая в небе звезда зовет меня в путь.</div>
+                    </div>
+                </div>
+                <div class="fragment" style="width: 30%">
+                    <div style="background: red; padding-bottom: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Я хотел бы остаться с тобой,<br>
+                            Просто остаться с тобой,</div>
+                    </div>
+
+                    <div style="background: red; margin-top: -60px; padding-top: 100px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Но высокая в небе звезда зовет меня в путь.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-m">
+<code>.first { margin-bottom: 60px; }</code>
+<code>.second { margin-top: -60px; }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-around; color: #000;">
+                <div style="width: 30%">
+                    <div style="background: red; padding-bottom: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Группа крови - на рукаве,</div>
+                    </div>
+
+                    <div style="background: red; margin-top: 10px;  background: #FACD99">
+                        <div style="background: #A0C4E8; position: relative;" ><div style="position: absolute; height: 60px; width: 100%;background: #FACD99; opacity: 0.5; "></div><span style="position: relative;">Мой порядковый номер - на рукаве,</span></div>
+                    </div>
+                </div>
+                <div class="fragment" style="width: 30%">
+                    <div style="background: red; padding-bottom: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Группа крови - на рукаве,</div>
+                    </div>
+
+                    <div style="background: red; margin-top: -60px; background: #FACD99">
+                        <div style="background: #A0C4E8; position: relative;" ><div style="position: absolute; height: 60px; width: 100%;background: #FACD99; opacity: 0.5; "></div><span style="position: relative;">Мой порядковый номер - на рукаве,</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-m">
+<code>.first { margin-bottom: 60px; }</code>
+<code>.second { margin-top: -80px; }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-around; color: #000;">
+                <div style="width: 30%">
+                    <div style="background: red; padding-bottom: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Пожелай мне удачи в бою, пожелай мне</div>
+                    </div>
+
+                    <div style="background: red; margin-top: 10px;  background: #FACD99">
+                        <div style="background: #A0C4E8; position: relative;" ><div style="position: absolute; height: 80px; width: 100%;background: #FACD99; opacity: 0.5; "></div><span style="position: relative;">Не остаться в этой траве, не остаться в этой траве</span></div>
+                    </div>
+                </div>
+                <div class="fragment" style="width: 30%">
+                    <div style="background: red; padding-bottom: 60px; background: #FACD99">
+                        <div style="background: #A0C4E8;" >Пожелай мне удачи в бою, пожелай мне</div>
+                    </div>
+
+                    <div style="background: red; margin-top: -80px; background: #FACD99">
+                        <div style="background: #A0C4E8; position: relative;" ><div style="position: absolute; height: 80px; width: 100%;background: #FACD99; opacity: 0.5; "></div><span style="position: relative;">Не остаться в этой траве, не остаться в этой траве</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">Боксы инлайн уровня</h1>
+        </section>
+
+
+        <section>
+            <h2>Боксы инлайн уровня</h2>
+            <ul>
+                <li>Элемент рендерится как строка</li>
+                <li class="fragment">Элементы строчного уровня выстраиваются слева направо сверху вниз</li>
+                <li class="fragment">Элемент инлайн уровня участвует в инлайн контексте форматирования</li>
+                <li class="fragment">Элемент инлайн уровня генерирует бокс(ы) инлайн уровня</li>
+                <li class="fragment">Участвующий в инлайн контексте форматирования элемент может создать вокруг себя анонимный инлайн бокс</li>
+            </ul>
+        </section>
+        <section>
+            <pre class="html size-l">
+<code><div>
+Some inline
+text <span>followed
+by a paragraph</span>
+followed by
+more inline text.</div></code></pre>
+            <div class="fragment" style="text-align: left">
+                <div>Some inline text <span><mark class="fragment">followed by a span</mark></span> followed by more inline text.</div>
+            </div>
+        </section>
+        <section>
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">Математика инлайн элементов</h1>
+        </section>
+
+        <section>
+            <h2>Математика inline элементов</h2>
+            <ul>
+                <li>не реагирует на ширину и высоту</li>
+                <li class="fragment">не реагирует на вертикальные margin'ы</li>
+                <li class="fragment">padding'и не затрагивают высоту строки</li>
+            </ul>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-xl">
+<code>.wrapper { width: 666px; }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="background: red; width: 666px;; text-align: left; width: 33%;">
+                    <span style="color: #000; color: #fff">Мы хотим видеть дальше, чем окна дома напротив, мы хотим жить, мы живучи, как кошки.</span>
+                </div>
+                <div class="fragment" style="background: red; width: 666px;; text-align: left; width: 33%;">
+                    <span class="inline-example" style="background: rgba(0, 0, 255, 0.5); color: #fff">Мы хотим видеть дальше, чем окна дома напротив, мы хотим жить, мы живучи, как кошки.</span>
+                </div>
+            </div>
+            <div class="fragment" style="padding-top: 20px">
+                <code>
+                    <style style="display: block" contenteditable>.reveal .inline-example {
+    height: 50000px;
+    width: 100000px;
+    margin: 400000px 0;
+    padding: 10px 0;
+}</style>
+                </code>
+            </div>
+        </section>
+
+
+        <section>
+            <h2>Боксы инлайн уровня по-умолчанию</h2>
+            <ul>
+                <li>b, big, i, small, tt</li>
+                <li>abbr, acronym, cite, code, dfn, em, kbd, strong, samp, var</li>
+                <li>a, bdo, br, img, map, object, q, script, span, sub, sup</li>
+                <li>button, input, label, select, textarea</li>
+                <li>display: inline, inline-block, inline-table</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Математика inline-block элементов</h2>
+            <ul>
+                <li>реагирует на ширину и высоту</li>
+                <li class="fragment">реагирует на вертикальные margin'ы</li>
+                <li class="fragment">padding'и затрагивают высоту строки</li>
+                <li class="fragment">создаёт внутри себя новый блочный контекст</li>
+            </ul>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-xl">
+<code>.wrapper { width: 666px; }</code>
+<code>.inner {  }</code>
+                </pre>
+            <div style="display: flex; justify-content: space-between;">
+                <div class="fragment" style="width: 45%; background: red; text-align: left">
+                    <span style="color: #fff; background: rgba(0,0,255,0.5); height: 50000px; width: 100000px; margin: 400000px 0; padding: 2px 0;">И вот мы пришли заявить о своих правах: "Да!"</span>
+                </div>
+                <div class="fragment" style="width: 45%; background: red; text-align: left">
+                    <span style="color: #fff; display: inline-block; background: rgba(0,0,255,0.5); width: 50%; height: 300px;  margin: 40px 0; padding: 2px 0;">Слышишь шелест плащей - это мы...  </span> Дальше действовать будем мы!
+
+                </div>
+            </div>
+        </section>
+
+        <!--<section data-background-image="img/17-flex.jpg">-->
+            <!--<h1 style="color: #fff; text-shadow: #000 0 0 5px;">Гибкость</h1>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>flex layout</h2>-->
+            <!--<p>Определяющим аспектом гибкого способа расположения боксов является возможность менять ширину и высоту элементов с максимальной эффективностью использования пространства</p>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>Словарь flex</h2>-->
+            <!--<div><img src="img/18-flex_terms.png"/></div>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<iframe src="https://player.vimeo.com/video/67011034" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <div><a href="https://vimeo.com/67011034">Flexbox, теперь понятно</a> from <a href="https://vimeo.com/pepelsbey">Vadim Makeev</a> on <a href="https://vimeo.com">Vimeo</a>.</div>-->
+            <!--<div><a href="http://pepelsbey.net/pres/flexbox-gotcha/?full#18">Презентация</a></div>-->
+        <!--</section>-->
+
+
+
+        <section>
+            <h1>ДЗ</h1>
+            <a href="https://github.com/urfu-2016/markup-task-5">https://github.com/urfu-2016/markup-task-5</a>
+            <p style="text-align: center" class="fragment deadline">Deadline<br> 7 ноября<br>29:59:59.999</p>
+        </section>
+    </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script src="https://yastatic.net/jquery/2.1.4/jquery.min.js"></script>
+
+<script>
+    $('.links a').on('mouseover', function () {
+        var text = $(this).data('content');
+        $('.output-links').text(text);
+
+    });
+    $('.links a').on('blur', function () {
+        $('.output-links').text('');
+
+    });
+
+    Reveal.addEventListener( 'fragmentshown', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            var root = $(event.fragment);
+            console.log(root);
+            setTimeout(function () {
+                $(root).find('h1').addClass('bounceInDown');
+                $(root).find( 'h4').addClass('bounceInRight');
+                $(root).find('small').eq(0).addClass('bounceInLeft');
+                $(root).find('small').eq(1).addClass('bounceInUp');
+            }, 0);
+        }
+    } );
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: false,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: '../lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: '../plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: '../plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: '../plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            { src: '../plugin/zoom-js/zoom.js', async: true },
+            { src: '../plugin/notes/notes.js', async: true }
+        ]
+    });
+    Reveal.configure({ slideNumber: true });
+
+</script>
+
+</body>
+</html>
