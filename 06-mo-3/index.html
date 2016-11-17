@@ -1,0 +1,1495 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Модель отображения</title>
+
+    <meta name="description" content="Лекция #7 по курсу «вёрстка». Модель отображения-3">
+    <meta name="author" content="Олег Мохов, Артём Кувалдин">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../lib/css/animate.css">
+    <link rel="stylesheet" href="../css/theme/night.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <link rel="stylesheet" href="css-custom/custom.css">
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <script type="text/javascript"
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <div class="slides">
+        <section style="font-size: 70px;">
+            <div class="fragment">
+                <h1 class="animated" style="font-size: 140px;">Модель отображения. Часть 3</h1>
+
+                <p style="text-align: center;">
+                    <small class=" animated"><span style="color: red">М</span>охов Олег</small><br>
+                    <small class=" animated"><span style="color: red">Р</span>азработчик интерфейсов</small>
+                </p>
+            </div>
+        </section>
+
+
+        <section data-background-transition="zoom" data-background-image="img/01.gif">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Гибкие коробки</h1>
+        </section>
+        <section data-transition="none" data-background-image="img/38.jpg">
+            <h1 style="text-shadow: #000 3px 2px 2px; text-decoration: line-through">Гибкие коробки</h1>
+            <h1 style="text-shadow: #000 3px 2px 2px;">Разметка</h1>
+        </section>
+        <section data-background-transition="zoom" data-background-image="img/02.jpg">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Прошлое</h1>
+        </section>
+        <section data-transition="none">
+            <img src="img/03.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/04.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/05.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/06.jpg"/>
+        </section>
+
+        <section data-background-transition="zoom" data-background-image="img/07.jpg">
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">&lt;table&gt;</h1>
+        </section>
+        <section data-transition="none">
+            <img src="img/06.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/08.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/09.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/10.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/11.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/12.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/12_1.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/13.jpg"/>
+        </section>
+
+        <section data-background-transition="zoom" data-background-image="img/wow.gif">
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">Семантика</h1>
+        </section>
+        <section data-transition="none">
+            <img src="img/15.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/16.jpg"/>
+        </section>
+
+        <section data-transition="none">
+            <img src="img/17.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/18.jpg"/>
+        </section>
+        <section data-transition="none">
+            <img src="img/19.jpg"/>
+        </section>
+
+
+        <section data-background-transition="zoom" data-background-image="img/39.jpg">
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">В чём же тут проблема?</h1>
+        </section>
+        <section>
+            <table style="width: 100%; height: 200px;">
+                <tr>
+                    <td style="width: 33%; background: rgba(255, 0, 0, 0.8);">33%</td>
+                    <td style="width: 33%; background: rgba(255, 0, 0, 0.8);">33%</td>
+                    <td style="width: 33%; background: rgba(255, 0, 0, 0.8);">33%</td>
+                </tr>
+            </table>
+        </section>
+        <section data-transition="none">
+            <table style="width: 100%;">
+                <tr>
+                    <td style="width: 31%; padding: 0 1%; vertical-align: top; background: rgba(255, 0, 0, 0.8);">33%</td>
+                    <td style="width: 31%; padding: 0 1%; background: rgba(255, 0, 0, 0.8);"><img style="width: 500px; max-width: none;" src="img/20.jpg"/></td>
+                    <td style="width: 31%; padding: 0 1%; vertical-align: top; background: rgba(255, 0, 0, 0.8);">33%</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <div style="width: 31%; padding: 0 1%; background: rgba(255, 0, 0, 0.8); height: 200px; float: left; text-align: left; margin-right: 1px;">33%, float: left</div>
+            <div style="width: 31%; padding: 0 1%; background: rgba(255, 0, 0, 0.8); float: left; text-align: left; margin-right: 1px;"><img style="width: 500px; max-width: none;" src="img/20.jpg"/></div>
+            <div style="width: 31%; padding: 0 1%; background: rgba(255, 0, 0, 0.8); height: 200px; float: left; text-align: left">33%, float: left</div>
+        </section>
+        <section>
+            <input type="hidden" class="fragment a1"/>
+            <style>
+                .a1.visible ~ div {
+                    -webkit-transition: transform 1s;
+                    -moz-transition: transform 1s;
+                    -ms-transition: transform 1s;
+                    -o-transition: transform 1s;
+                    transition: transform 1s;
+                    transform: scale(0.7);
+                    transform-origin: 0 0;
+                }
+            </style>
+            <div style="text-align: left">
+                <div style="width: 31%; padding: 0 1%;vertical-align: top;  background: rgba(255, 0, 0, 0.8); height: 200px; display: inline-block; text-align: left; margin-right: 1px;">33%, display: inline-block</div>
+                <div style="width: 31%; padding: 0 1%;vertical-align: top;  background: rgba(255, 0, 0, 0.8); display: inline-block; text-align: left; margin-right: 1px;"><img style="width: 500px; max-width: none;" src="img/20.jpg"/></div>
+                <div style="width: 33%;vertical-align: top;  background: rgba(255, 0, 0, 0.8); height: 200px; display: inline-block; text-align: left">33%, display: inline-block</div>
+            </div>
+        </section>
+        <section>
+            <iframe width="860" height="484" src="https://www.youtube.com/embed/L-h1-YGoVS0" frameborder="0" allowfullscreen></iframe>
+        </section>
+        <section>
+            <h2>Основные проблемы раскладок</h2>
+            <ul>
+                <li class="fragment">float'ы и хаки типа clearfix</li>
+                <li class="fragment">Абсолютное позиционирование решает проблемы смежных элементов, но создаёт проблемы их связности. Не говоря уже о том что элементы выводятся из потока</li>
+                <li class="fragment">Куча лишней разметки при использовании display: table или таблиц</li>
+                <li class="fragment">Пробелы при использовании inline-block'ов</li>
+            </ul>
+        </section>
+        <section data-background-transition="zoom" data-background-image="img/21.jpg">
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;">flexbox</h1>
+        </section>
+        <section>
+            <h2>Flexbox</h2>
+            <p>Flexbox позволяет контролировать размер, порядок и выравнивание элементов по нескольким осям, распределение свободного места между элементами и многое другое.</p>
+            <p><a href="http://www.w3.org/TR/css3-flexbox/">CSS Flexible Box Layout Module</a></p>
+        </section>
+        <section data-background-transition="zoom" data-background-image="img/m.jpg">
+            <h2 class="fragment" style="margin-top: 400px; text-align: right; color: #fff; text-shadow: #000 0 0 5px;">"Первая система для раскладки, которая не хак"<br/>Вадим Макеев</h2>
+        </section>
+
+        <section>
+            <h2>Основные преимущества Flexbox</h2>
+            <ol>
+                <li class="fragment">Элементы могут сжиматься и растягиваться по заданным правилам, занимая нужное пространство.</li>
+                <li class="fragment">Выравнивание по вертикали и горизонтали.</li>
+                <li class="fragment">Расположение элементов в html не имеет решающего значения</li>
+                <li class="fragment">Элементы могут автоматически выстраиваться в несколько строк/столбцов, занимая все предоставленное место.</li>
+                <li class="fragment">Локализация для языков с другим написанием</li>
+                <li class="fragment">Просто и понятно.</li>
+            </ol>
+        </section>
+        <section>
+            <img src="img/22.png"/>
+        </section>
+        <section>
+            <img src="img/flex-current.png"/>
+            <div>
+                <a href="http://caniuse.com/#feat=flexbox">caniuse.com/#feat=flexbox</a>
+            </div>
+        </section>
+        <section data-background-transition="zoom" data-background-image="img/23.jpg">
+            <h1 style="color: #fff; text-shadow: #000 0 0 5px;" class="fragment">display: flex</h1>
+        </section>
+        <section>
+                <pre class="html size-xl">
+<code><div>+1 к оценке –</div>
+<div>9.5 балла</div>
+<div>допуск до экзамена –</div>
+<div>5 баллов</div>
+    </code></pre>
+            <div class="fragment flex-example">
+                <div>+1 к оценке –</div>
+                <div>9.5 балла</div>
+                <div>допуск до экзамена –</div>
+                <div>5 баллов</div>
+            </div>
+
+        </section>
+        <section data-transition="none">
+                <pre class="css size-xl">
+.wrapper {
+    display: flex;
+}
+    </code></pre>
+            <div class="fragment flex-example" style="display: flex;">
+                <div>+1 к оценке –</div>
+                <div>9.5 балла</div>
+                <div>допуск до экзамена –</div>
+                <div>5 баллов</div>
+            </div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-xl">
+.wrapper {
+    display: flex;
+}
+    </code></pre>
+            <div class="flex-example" style="display: flex;">
+                <div>+1 к оценке –</div>
+                <div>9.5 балла</div>
+                <div>допуск до экзамена –</div>
+                <div><span style="text-decoration: line-through">5 баллов</span><br/>4 балл</div>
+            </div>
+        </section>
+        <section data-transition="none">
+                <pre class="css size-xl">
+.wrapper {
+    display: flex;
+}
+    </code></pre>
+            <div class="flex-example flex-example-order" style="display: flex;">
+                <div>+1 к оценке –</div>
+                <div>9.5 балла</div>
+                <div>допуск до экзамена –</div>
+                <div><span style="text-decoration: line-through">5 баллов</span><br/>4 балл</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <img src="img/24.png"/>
+            <h2 class="di1">&nbsp;</h2>
+        </section>
+        <section data-transition="none">
+            <input type="hidden" class="fragment di1"/>
+            <input type="hidden" class="fragment di2"/>
+            <input type="hidden" class="fragment di2-5"/>
+            <input type="hidden" class="fragment di3"/>
+            <input type="hidden" class="fragment di4"/>
+            <input type="hidden" class="fragment di5"/>
+            <div class="flex-example-direction">
+                <div class="di2">
+                    <img src="img/25.png"/>
+                    <h2 class="di1">flex-direction<span class="di2-5">: row</span></h2>
+                </div>
+                <div class="di3">
+                    <img src="img/26.png"/>
+                    <h2>flex-direction: row-reverse</h2>
+                </div>
+                <div class="di4">
+                    <img src="img/27.png"/>
+                    <h2>flex-direction: column</h2>
+                </div>
+                <div class="di5">
+                    <img src="img/28.png"/>
+                    <h2>flex-direction: column-reverse</h2>
+                </div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <div class="flex-example-small">
+                <div class="flex-example-wrap">
+                    <h2>flex-direction: row</h2>
+                    <div  class="flex-example" style="display: flex;">
+                        <div>+1 к оценке –</div>
+                        <div>9.5 балла</div>
+                        <div>допуск до экзамена –</div>
+                        <div><span style="text-decoration: line-through">5 баллов</span><br/>4 балл</div>
+                    </div>
+                </div>
+                <div class="flex-example-wrap fragment">
+                    <h2>flex-direction: row-reverse</h2>
+                    <div class="flex-example" style="display: flex; flex-direction: row-reverse">
+                        <div>+1 к оценке –</div>
+                        <div>9.5 балла</div>
+                        <div>допуск до экзамена –</div>
+                        <div><span style="text-decoration: line-through">5 баллов</span><br/>4 балл</div>
+                    </div>
+                </div>
+                <div class="flex-example-wrap fragment">
+                    <h2>flex-direction: column</h2>
+                    <div class="flex-example" style="display: flex; flex-direction: column">
+                        <div>+1 к оценке –</div>
+                        <div>9.5 балла</div>
+                        <div>допуск до экзамена –</div>
+                        <div><span style="text-decoration: line-through">5 баллов</span><br/>4 балл</div>
+                    </div>
+                </div>
+
+                <div class="flex-example-wrap fragment">
+                    <h2>flex-direction: column-reverse</h2>
+                    <div class="flex-example" style="display: flex; flex-direction: column-reverse">
+                        <div>+1 к оценке –</div>
+                        <div>9.5 балла</div>
+                        <div>допуск до экзамена –</div>
+                        <div><span style="text-decoration: line-through">5 баллов</span><br/>4 балл</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>justify-content</h2>
+            <div>задаёт выравнивание <strong>вдоль главной</strong> оси</div>
+            <div class="fragment">значение по-умолчанию <strong>flex-start</strong></div>
+            <div class="fragment flex-example background" style="display: flex;">
+                <div>не сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>justify-content: flex-end</h2>
+            <div class="flex-example background" style="display: flex; justify-content: flex-end;">
+                <div>не сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>justify-content: center</h2>
+            <div class="flex-example background" style="display: flex; justify-content: center">
+                <div>не сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>justify-content: space-between</h2>
+            <div class="flex-example background" style="display: flex; justify-content: space-between;">
+                <div>не сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>justify-content: space-around</h2>
+            <div class="flex-example background" style="display: flex; justify-content: space-around">
+                <div>не сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-items</h2>
+            <div>задаёт выравнивание <strong>вдоль поперечной</strong> оси</div>
+            <div class="fragment">значение по-умолчанию <strong>stretch</strong> &mdash; блоки растянуты, занимая все доступное место по поперечной оси, при этом все же учитываются </div>
+            <div class="fragment flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-items: flex-start</h2>
+            <div class="flex-example background" style="display: flex; align-items: flex-start">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h2>align-items: flex-end</h2>
+            <div class="flex-example background" style="display: flex; align-items: flex-end">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h2>align-items: center</h2>
+            <div class="flex-example background" style="display: flex; align-items: center">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+
+        <section data-transition="none">
+            <h2>align-items: baseline</h2>
+            <div class="flex-example background" style="display: flex; align-items: baseline">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-items: baseline</h2>
+            <div class="flex-example background" style="display: flex; align-items: baseline">
+                <div style="padding-top: 50px">не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h1 class="fragment" style="text-shadow: #000 3px 2px 2px;">Многострочность</h1>
+        </section>
+        <section data-transition="none">
+            <h2>Многострочность</h2>
+            <div class="flex-example background" style="display: flex;">
+                <div style="padding-top: 50px">не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>Многострочность</h2>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-wrap</h2>
+            <div>задаёт режим форсирования выстраивания блоков в одну линию</div>
+            <div class="fragment">значение по-умолчанию <strong>nowrap</strong> &mdash; блоки расположены в одну линию слева направо (в rtl справа налево)</div>
+            <div class="fragment flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-wrap: wrap</h2>
+            <div class="flex-example background" style="display: flex; flex-wrap: wrap">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-wrap: wrap-reverse</h2>
+            <div class="flex-example background" style="display: flex; flex-wrap: wrap-reverse">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-flow</h2>
+            <div>комбинация flex-direction + flex-wrap</div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content</h2>
+            <div>определяет то, каким образом образовавшиеся ряды блоков будут выровнены по вертикали и как они поделят между собой все пространство flex-контейнера.</div>
+            <div class="fragment">значение по-умолчанию <strong>stretch</strong> &mdash; ряды блоков растянуты, дабы занять все имеющееся пространство</div>
+            <div class="fragment"><strong>работает только при flex-wrap: wrap; flex-wrap: wrap-reverse</strong></div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content: stretch</h2>
+            <div class="flex-example background" style="display: flex; flex-wrap: wrap; height: 500px;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content: flex-start</h2>
+            <div class="flex-example background" style="display: flex; align-content: flex-start; flex-wrap: wrap; height: 500px;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content: flex-end</h2>
+            <div class="flex-example background" style="display: flex; align-content: flex-end; flex-wrap: wrap; height: 500px;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content: center</h2>
+            <div class="flex-example background" style="display: flex; align-content: center; flex-wrap: wrap; height: 500px;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content: space-between</h2>
+            <div class="flex-example background" style="display: flex; align-content: space-between; flex-wrap: wrap; height: 500px;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-content: space-around</h2>
+            <div class="flex-example background" style="display: flex; align-content: space-around; flex-wrap: wrap; height: 500px;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+                <div>10</div>
+            </div>
+        </section>
+
+        <section data-transition="none" data-background-image="">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Правила для дочерних элементов flex-контейнера</h1>
+        </section>
+        <section data-transition="none">
+            <h2>align-self</h2>
+            <div>Делает возможным переопределять свойство flex-контейнера align-items для отдельного flex-блока</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-self: flex-start</h2>
+            <div>Делает возможным переопределять свойство flex-контейнера align-items для отдельного flex-блока</div>
+            <div class="flex-example background" style="display: flex;">
+                <div style="padding-top: 50px;">не<br/> сдал</div>
+                <div style="background: rgba(0, 0, 255, 0.5); align-self: flex-start;">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>align-self: center</h2>
+            <div>Делает возможным переопределять свойство flex-контейнера align-items для отдельного flex-блока</div>
+            <div class="flex-example background" style="display: flex;">
+                <div style="padding-top: 50px;">не<br/> сдал</div>
+                <div style="background: rgba(0, 0, 255, 0.5); align-self: center;">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-basis</h2>
+            <div>Задает изначальный размер по главной оси для flex-блока до того, как к нему будут применены преобразования, основанные на других flex-факторах.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div>3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-basis: 200px</h2>
+            <div>Задает изначальный размер по главной оси для flex-блока до того, как к нему будут применены преобразования, основанные на других flex-факторах.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div style="flex-basis: 200px; background: rgba(0, 0, 255, 0.5);">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-basis: 600px</h2>
+            <div>Задает изначальный размер по главной оси для flex-блока до того, как к нему будут применены преобразования, основанные на других flex-факторах.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div style="flex-basis: 600px; background: rgba(0, 0, 255, 0.5);">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-basis: 1000px</h2>
+            <div>Задает изначальный размер по главной оси для flex-блока до того, как к нему будут применены преобразования, основанные на других flex-факторах.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div style="flex-basis: 1000px; background: rgba(0, 0, 255, 0.5);">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-background-image="img/37.jpg">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Жадность и бедность</h1>
+        </section>
+        <section data-background-image="img/37.jpg">
+            <h1 style="text-shadow: #000 3px 2px 2px;">flex-grow/<br/>flex-shrink</h1>
+        </section>
+        <section data-transition="none">
+            <h2>flex-grow</h2>
+            <div>Определяет то на сколько отдельный блок <strong>может быть</strong> больше соседних</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div style="background: rgba(0, 0, 255, 0.5);">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-grow: 2</h2>
+            <div>Определяет то на сколько отдельный блок <strong>может быть</strong> больше соседних</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>не<br/> сдал</div>
+                <div style="flex-grow: 2; background: rgba(0, 0, 255, 0.5);">3</div>
+                <div>5</div>
+                <div>8</div>
+                <div>10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-grow: 2</h2>
+            <div>Определяет то на сколько отдельный блок <strong>может быть</strong> больше соседних</div>
+            <div class="flex-example background" style="display: flex;">
+                <div style="flex-grow: 1;">не<br/> сдал</div>
+                <div style="flex-grow: 2; background: rgba(0, 0, 255, 0.5);">3</div>
+                <div style="flex-grow: 1;">5</div>
+                <div style="flex-grow: 1;">8</div>
+                <div style="flex-grow: 1;">10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-grow: 4</h2>
+            <div>Определяет то на сколько отдельный блок <strong>может быть</strong> больше соседних</div>
+            <div class="flex-example background" style="display: flex;">
+                <div style="flex-grow: 1;">не<br/> сдал</div>
+                <div style="flex-grow: 4; background: rgba(0, 0, 255, 0.5);">3</div>
+                <div style="flex-grow: 1;">5</div>
+                <div style="flex-grow: 1;">8</div>
+                <div style="flex-grow: 1;">10</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-shrink</h2>
+            <div>Определяет, насколько flex-блок будет уменьшаться относительно соседних элементов внутри flex-контейнера в случае недостатка свободного места. По умолчанию равен 1.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</div>
+                <div>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</div>
+                <div>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>flex-shrink: 0</h2>
+            <div>Определяет, насколько flex-блок будет уменьшаться относительно соседних элементов внутри flex-контейнера в случае недостатка свободного места. По умолчанию равен 1.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</div>
+                <div style="flex-shrink: 0; background: rgba(0, 0, 255, 0.5);">3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</div>
+                <div>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3</div>
+            </div>
+        </section>
+        <section data-background-image="img/40.png">
+            <h1 style="text-shadow: #000 3px 2px 2px;">Порядок</h1>
+        </section>
+        <section>
+            <h2>order</h2>
+            <div>порядок следования отдельно взятого flex-блока внутри flex-контейнера. По умолчанию равно 0.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>order: 1</h2>
+            <div>порядок следования отдельно взятого flex-блока внутри flex-контейнера. По умолчанию равно 0.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div>1</div>
+                <div style="background: rgba(0, 0, 255, 0.5); order: 1">2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+            </div>
+        </section>
+        <section data-transition="none">
+            <h2>order: 1, 2, 3.. n</h2>
+            <div>порядок следования отдельно взятого flex-блока внутри flex-контейнера. По умолчанию равно 0.</div>
+            <div class="flex-example background" style="display: flex;">
+                <div style="order: 2">1</div>
+                <div style="background: rgba(0, 0, 255, 0.5); order: 1">2</div>
+                <div style="order: 3">3</div>
+                <div style="order: 5">4</div>
+                <div style="order: 4">5</div>
+            </div>
+        </section>
+
+        <section data-background-image="img/29.jpg">
+            <h1 class="fragment" style="text-shadow: #000 3px 2px 2px;">Все лгут</h1>
+        </section>
+
+        <section>
+            <h2>Недостатки flexbox</h2>
+            <ol>
+                <li class="fragment">Несвязанность вертикально расположенных элементов</li>
+                <li class="fragment">Порядок элементов требует предварительных договорённостей <span class="fragment">(z-index)</span></li>
+                <li class="fragment"></li>
+            </ol>
+        </section>
+
+        <section data-background-image="img/34.jpg">
+            <h1 class="fragment" style="text-shadow: #000 3px 2px 2px;">Модульная система вёрстки</h1>
+        </section>
+
+
+        <section data-transition="none" data-background-image="img/30.jpg"></section>
+        <section data-transition="none" data-background-image="img/31.jpg"></section>
+        <section data-transition="none" data-background-image="img/32.jpg"></section>
+        <section data-transition="none" data-background-image="img/33.jpg"></section>
+
+        <section>
+            <h2>Модульная система вёрстки</h2>
+            <p>Система вёрстки, при которой основой композиции полос и разворотов становится модульная сетка с определенным шагом (модулем), одинаковым или разным по горизонтали и вертикали.</p>
+            <div class="fragment"><a href="http://www.w3.org/TR/css-grid-1/">CSS Grid Layout</a></div>
+        </section>
+
+        <section data-transition="none">
+            <img src="img/35.png" />
+        </section>
+        <section data-transition="none">
+            <img src="img/35_2016.png"/>
+        </section>
+        <section>
+            <h2>Определение</h2>
+            <p>In grid layout, the content of a grid container is laid out by positioning and aligning it into a grid.</p>
+            <p class=fragment>При grid разметке содержимое контейнера позиционируется и выравнивается относительно сетки.</p>
+        </section>
+        <section>
+            <h2>Определение</h2>
+            <p>The grid is an intersecting set of horizontal and vertical grid lines that divides the grid container’s space into grid areas, into which grid items (representing the grid container’s content) can be placed.</p>
+            <p class=fragment>Сетка – это набор пересекающихся вертикальных и горизонтальных линий, которые делят контейнер на зоны, внутри которых располагаются элементы вёрстки.</p>
+        </section>
+
+        <section>
+            <h1>Строки и столбцы</h1>
+        </section>
+
+
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.layout {
+    display: grid;
+
+    grid-template-columns:
+    100px 10px 100px 10px 100px;
+
+    grid-template-rows:
+    20px 10px 30px;
+    }
+</code></pre>
+        </section>
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code data-noescape>.layout {
+    display: grid;
+
+    grid-template-columns:
+    100px 1fr 100px 2fr 100px; <span class="fragment">/* fr - flex factor */</span>
+
+    grid-template-rows:
+    auto 10px auto;
+    }
+</code></pre>
+        </section>
+
+        <section>
+                <pre class="html size-xl">
+<code><div class="wrapper">
+    <div class="a">a</div>
+    <div class="b">b</div>
+    <div class="c">c</div>
+    <div class="d">d</div>
+    <div class="e">e</div>
+    <div class="f">f</div>
+</div></code></pre>
+    <pre class="css size-xl fragment" style="margin-top: 30px">
+<code>.wrapper {
+    display: grid;
+    }
+</code></pre>
+        </section>
+
+
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.a {
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+    }
+</code></pre>
+            <div>
+                <table class="grid">
+                    <tr style="height: 100px">
+                        <td style="width: 50px; background: rgba(255, 0 ,0, 0.5);"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.b {
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+    }
+</code></pre>
+            <div>
+                <table class="grid">
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px; background: rgba(255, 0 ,0, 0.5);"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.b {
+    grid-column-start: 3;
+    grid-column-end: 6;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+    }
+</code></pre>
+            <div>
+                <table class="grid">
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px; background: rgba(255, 0 ,0, 0.5);" colspan="3"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.b {
+    grid-column: 3 / 6;
+
+    grid-row: 3 / 4;
+    }
+</code></pre>
+            <div>
+                <table class="grid">
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px; background: rgba(255, 0 ,0, 0.5);" colspan="3"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.b {
+    grid-area: 3 / 3 / 4 / 6;
+    }
+</code></pre>
+            <div>
+                <table class="grid">
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px; background: rgba(255, 0 ,0, 0.5);" colspan="3"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>
+    .b {
+    grid-area: 3 / 3 / 4 / 6;
+    }
+
+    .wrapper {
+    direction: rtl;
+    }
+</code></pre>
+            <div>
+                <table class="grid">
+                    <tr style="height: 100px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 10px">
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                    <tr style="height: 100px">
+                        <td style="width: 50px; background: rgba(255, 0 ,0, 0.5);" colspan="3"></td>
+                        <td style="width: 10px"></td>
+                        <td style="width: 50px"></td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <section>
+            <h1>Шаблоны</h1>
+        </section>
+        <section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code data-noescape>.layout {
+    display: grid;
+
+    grid-template-columns:
+    100px 1fr 100px 2fr 100px;
+
+    grid-template-rows:
+    auto 10px auto;
+
+    grid-template-areas: "h h h h h"
+    "a b b b c"
+    "d d d e e";
+    }
+</code></pre>
+        </section><section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.a {
+    grid-area: h;
+    }
+</code></pre>
+        <div>
+            <table class="grid">
+                <tr style="height: 100px">
+                    <td style="width: 50px;; background: rgba(255, 0 ,0, 0.5);" colspan="5"></td>
+                </tr>
+                <tr style="height: 10px">
+                    <td style="width: 50px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                </tr>
+                <tr style="height: 100px">
+                    <td style="width: 50px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px;"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                </tr>
+            </table>
+        </div>
+    </section><section data-transition="none">
+    <pre class="css size-xl" style="margin-top: 30px; height: 370px">
+<code>.a {
+    grid-area: a;
+    }
+</code></pre>
+        <div>
+            <table class="grid">
+                <tr style="height: 100px">
+                    <td style="width: 50px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px;"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                </tr>
+                <tr style="height: 10px">
+                    <td style="width: 50px;  background: rgba(255, 0 ,0, 0.5);"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                </tr>
+                <tr style="height: 100px">
+                    <td style="width: 50px"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px;"></td>
+                    <td style="width: 10px"></td>
+                    <td style="width: 50px"></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+        <section>
+            <h2><a href="http://dabblet.com/gist/f520c6c75ff908db434cad16aeec5ef7">Demo</a></h2>
+        </section>
+
+
+        <section>
+            <h1>Где использовать?</h1>
+        </section>
+        <section>
+            <img src="img/03.jpg"/>
+        </section>
+        <section>
+            <img src="img/everest.png"/>
+        </section>
+        <section>
+            <img src="img/ff.png"/>
+        </section>
+        <section>
+            <h2>Когда стоит использовать grid?</h2>
+            <ul>
+                <li>Когда есть сетка (не колонки, а именно сетка)</li>
+                <li class="fragment">Когда сетка может изменяться под действием контента</li>
+                <li class="fragment">Когда в сетке есть блоки на несколько ячеек</li>
+                <li class="fragment">В админках <span class="fragment">(уже сейчас!)</span></li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Ссылки</h2>
+            <ul>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">MDN: Using flexible boxes</a></li>
+                <li><a href="http://html5.by/blog/flexbox/">html5.by: Что такое Flexbox?</a></li>
+                <li><a href="http://www.youtube.com/watch?v=x0fcNDaE7Z0">Видео: Flexbox, теперь понятно</a></li>
+                <li><a href="http://www.w3.org/TR/css-flexbox-1/">CSS Flexible Box Layout Module Level 1</a></li>
+                <li><a href="http://gridbyexample.com/">Grid by example</a></li>
+                <li><a href="http://www.w3.org/TR/css-grid-1/">CSS Grid Layout Module Level 1</a></li>
+                <li><a href="https://www.youtube.com/watch?v=JoRVUILXLxU&t=562s">Видео: Можно вообще всё. Раскладка по гриду</a></li>
+            </ul>
+        </section>
+
+
+
+        <section>
+            <h1>ДЗ</h1>
+            <a href="https://github.com/urfu-2016/markup-task-7">https://github.com/urfu-2016/markup-task-7</a>
+            <p style="text-align: center" class="fragment deadline">Deadline<br> 19 ноября<br>02:59:59.999</p>
+        </section>
+    </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script src="https://yastatic.net/jquery/2.1.4/jquery.min.js"></script>
+
+<script>
+    $('.links a').on('mouseover', function () {
+        var text = $(this).data('content');
+        $('.output-links').text(text);
+
+    });
+    $('.links a').on('blur', function () {
+        $('.output-links').text('');
+
+    });
+
+    Reveal.addEventListener( 'fragmentshown', function( event ) {
+        if (Reveal.isFirstSlide()) {
+            var root = $(event.fragment);
+            console.log(root);
+            setTimeout(function () {
+                $(root).find('h1').addClass('bounceInDown');
+                $(root).find( 'h4').addClass('bounceInRight');
+                $(root).find('small').eq(0).addClass('bounceInLeft');
+                $(root).find('small').eq(1).addClass('bounceInUp');
+            }, 0);
+        }
+    } );
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        history: true,
+        center: false,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: '../lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: '../plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: '../plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: '../plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            { src: '../plugin/zoom-js/zoom.js', async: true },
+            { src: '../plugin/notes/notes.js', async: true }
+        ]
+    });
+    Reveal.configure({ slideNumber: true });
+
+</script>
+
+</body>
+</html>
