@@ -1,0 +1,621 @@
+.main-header {
+    color: yellow !important;
+}
+.visible .main-header {
+    animation: hue 10s ease-in infinite, bounceInDown 1s linear forwards;
+}
+
+sub {
+    font-size: .6em !important;
+}
+/*.reveal {*/
+    /*font-family: textbook;*/
+/*}*/
+
+/*.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {*/
+    /*font-family: textbook-bold;*/
+/*}*/
+
+/*.reveal em {*/
+    /*font-family: textbook-light;*/
+/*}*/
+
+section .strike {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.yandex table.tableMiddle td {
+    vertical-align: middle;
+}
+
+.yandex table.tableCenter td {
+    text-align: center;
+}
+
+.yandex table.noBorder td {
+    border: none;
+}
+
+pre.size-s {
+    font-size: 15px !important;
+}
+.reveal pre code {
+    max-height: 620px;
+}
+p.size-s {
+    font-size: 30px !important;
+}
+
+p.size-m {
+    font-size: 35px !important;
+}
+
+p.size-l {
+    font-size: 40px !important;
+}
+
+p.size-xl {
+    font-size: 50px !important;
+}
+
+p.size-xxl {
+    font-size: 60px !important;
+}
+
+pre.size-m {
+    font-size: 18px !important;
+}
+
+pre.size-l {
+    font-size: 25px !important;
+}
+
+pre.size-xl {
+    font-size: 30px !important;
+}
+
+pre.size-xxl {
+    font-size: 40px !important;
+}
+
+mark {
+    border-radius: 5px;
+    /*color: #fff !important;*/
+}
+
+mark.red {
+    background: red;
+    color: #fff !important;
+}
+
+mark.green.blue {
+    background: linear-gradient(to right, #00f, #006b05);
+}
+
+mark.red.blue {
+    background: linear-gradient(to right, #00f, #f00);
+}
+
+mark.green.red {
+    background: linear-gradient(to right, #006b05, #f00);
+}
+
+mark.blue {
+    background: blue;
+    color: #fff !important;
+}
+
+mark.green {
+    background: #006b05;
+    color: #fff !important;
+}
+
+.reveal .slides section mark.fragment {
+    background: transparent;
+    visibility: visible;
+    color: white;
+    opacity: 1;
+}
+
+.reveal .slides section mark.fragment.toggle.visible {
+    color: white;
+    background: transparent;
+}
+
+.reveal .slides section mark.fragment.visible.current-fragment.toggle,
+.reveal .slides section mark.fragment.visible {
+    background: #ff0;
+    color: black;
+}
+
+.reveal .slides section mark.blue.fragment.visible {
+    background: #00f;
+    color: black;
+}
+
+.reveal .slides section mark.green.fragment.visible {
+    background: #006b05;
+    color: black;
+}
+
+.reveal .slides section mark.red.fragment.visible {
+    background: #f00;
+    color: black;
+}
+
+section.ex button.size-m,
+section.ex textarea.size-m {
+    margin-bottom: 20px;
+    font-size: 37px;
+}
+
+section.ex button:focus {
+    outline: 10px solid red;
+}
+
+section.ex button.size-l,
+section.ex input.size-l,
+section.ex textarea.size-l {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+section.ex button.zoom,
+section.ex input.zoom {
+    transform: scale(2);
+    vertical-align: middle;
+    margin: 10px;
+}
+
+.reveal .progress span {
+    color: rgb(243, 86, 38);
+    background: linear-gradient(92deg, rgb(243, 204, 35), rgb(254, 146, 11));
+    -webkit-animation: hue 100s linear infinite;
+}
+
+a {
+    color: #068ee9 !important;
+}
+
+div.body div.fragment.visible.animated {
+    -webkit-animation-name: bounceIn;
+}
+
+.deadline {
+    color: white;
+    transform: scale(.1);
+    pointer-events: none;
+    transition-property: color, transform !important;
+    transition-duration: 30s !important;
+    transition-timing-function: linear !important;
+}
+
+.deadline.visible {
+    color: red;
+    transform: scale(5);
+}
+
+@-webkit-keyframes hue {
+    from {
+        -webkit-filter: hue-rotate(0deg);
+    }
+    to {
+        -webkit-filter: hue-rotate(360deg);
+    }
+}
+
+.fragment.toggle {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/*====================================*/
+.position {
+    font-size: 40px !important;
+}
+
+.position.visible .position-value,
+.position.visible .position-pipe,
+.position.visible .position-name {
+    color: #636363;
+}
+
+.position.visible .position-pipe.checked {
+    visibility: visible;
+    animation-name: slideUpRetourn;
+}
+
+.position.visible .position-value.checked {
+    -webkit-animation-name: tinRightIn;
+    animation-name: tinRightIn;
+    color: #fff;
+    visibility: visible;
+}
+
+.position-value.checked,
+.position-pipe.checked {
+    display: inline-block;
+    visibility: hidden;
+}
+
+/*====================================*/
+
+.reveal .ex::before {
+    content: 'EXAMPLE';
+    position: absolute;
+    color: #000;
+    bottom: -12px;
+    right: -1px;
+    background: #fff;
+    padding: 1px 14px;
+    font-size: 0.6em;
+}
+
+.reveal .ex {
+    border: 1px dashed #fff;
+}
+
+/*====================================*/
+.ex {
+    padding: 20px 10px !important;
+    position: relative;
+}
+
+.box {
+    background: rgba(61, 133, 198, .9);
+    outline: 1px solid #183951;
+}
+
+.box.red {
+    background: rgba(198, 46, 52, 0.9);
+}
+
+.box.green {
+    background: rgba(86, 198, 67, 0.9);
+}
+/*====================================*/
+.image-container {
+    overflow: hidden;
+    width: 500px;
+    height: 264px;
+}
+.visible.zoom-image {
+    transform: scale(8);
+}
+
+.visible.mona-zoom {
+    transform: scale(20);
+}
+
+.svg-zoom-in-out.visible {
+    animation: svg-zoom-in-out 3s linear forwards;
+}
+@keyframes svg-zoom-in-out
+{
+    25%
+    {
+        transform: scale(.2);
+    }
+    100%
+    {
+        transform: scale(2);
+    }
+}
+.change-color.red.visible {
+    color: red;
+}
+.change-color.black.visible {
+    color: black;
+}
+.change-color.green.visible {
+    color: green;
+}
+.change-color.darkmagenta.visible {
+    color: darkmagenta;
+}
+.change-color.orangered.visible {
+    color: orangered;
+}
+.change-color.springgreen.visible {
+    color: springgreen;
+}
+.change-color.yellowgreen.visible {
+    color: yellowgreen;
+}
+
+.change-color.slategrey.visible {
+    color: slategrey ;
+}
+/*====================================*/
+.green {
+    color: #8bc34a;
+}
+.red {
+    color: #ff5722;
+}
+.rgba {
+    transition: all .3s;
+    background: rgba(255, 0, 0, 1) !important;
+}
+.rgba.visible,
+.rgba:hover {
+    background: rgba(255, 0, 0, .5) !important;
+}
+.hsla {
+    transition: all .3s;
+    background-color: hsla(120, 100%, 50%, 1);
+}
+.hsla:hover,
+.hsla.visible{
+    background-color: hsla(120, 100%, 50%, .5);
+}
+.visible.hue {
+    color: red;
+    animation: hue 2s linear infinite;
+}
+.visible.saturation {
+    color: red;
+    animation: saturation 2s linear alternate infinite;
+}
+@-webkit-keyframes saturation {
+    from {
+        color: hsl(0, 0%, 50%);
+    }
+    to {
+        color: hsl(0, 100%, 50%);
+    }
+}
+.visible.brightness {
+    color: red;
+    animation: brightness 2s linear alternate infinite;
+}
+@-webkit-keyframes brightness {
+    from {
+        -webkit-filter: brightness(0);
+    }
+    to {
+        -webkit-filter: brightness(1);
+    }
+}
+.visible.lightness {
+    color: red;
+    animation: lightness 2s linear alternate infinite;
+}
+@keyframes lightness {
+    from {
+        color: hsl(0, 100%, 0%);
+    }
+    to {
+        color: hsl(0, 100%, 100%);
+    }
+}
+.zoom-logo.visible {
+    position: relative;
+    z-index: 1;
+    transform: scale(2);
+}
+.zoom-logo ~ img,
+.zoom-logo ~ a img{
+    transition: -webkit-filter 1s;
+}
+.zoom-logo.visible ~ img:not(.fragment),
+.zoom-logo.visible ~ a img {
+    -webkit-filter: grayscale(100%);
+}
+img.ps {
+    border: 0 !important;
+    background: transparent !important;
+}
+
+.image-css {
+    border: 5px solid #ccc !important;
+}
+.contain-change.visible,
+.cover-change.visible {
+    animation: change-width 2s ease forwards;
+}
+@keyframes change-width
+{
+    to {
+        width: 300px;
+    }
+}
+.move-bg {
+    background-position: 0 0 !important;
+}
+.move-bg.visible {
+    animation: move-bg 8s;
+}
+@keyframes move-bg {
+    25% {
+        background-position: 100% 0;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0 100%;
+    }
+}
+.move-bg~pre {
+    visibility: hidden;
+}
+.move-bg.visible ~ .move-bg-state-1 {
+    transition: 2s linear;
+    visibility: visible;
+}
+.move-bg.visible ~ .move-bg-state-2 {
+    transition: all 2s linear 2s;
+    visibility: visible;
+}
+.move-bg.visible ~ .move-bg-state-3 {
+    transition: all 2s linear 4s;
+    visibility: visible;
+}
+.move-bg.visible ~ .move-bg-state-4 {
+    transition: all 2s linear 6s;
+    visibility: visible;
+}
+
+.image-width-height.visible {
+    animation: image-width-height 3s alternate infinite;
+}
+@keyframes image-width-height {
+    50% {
+        width: 300px;
+        height: 200px;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+    }
+}
+.how-it-work .social {
+    width: 705px;
+    height: 203px;
+    position: absolute;
+    transition: background-position .3s ease;
+    top: 0;
+    left: 0;
+}
+.how-it-work {
+    position: relative;
+    height: 203px;
+}
+.how-it-work:after {
+    border: 10px solid red;
+    width: 96px;
+    height: 96px;
+    content: '';
+    display: block;
+    position: absolute;
+    top: -9px;
+    left: -8px;
+}
+.social {
+    width: 96px;
+    height: 96px;
+    display: inline-block;
+    background-image: url(../img/social-icons.example.png);
+    background-repeat: no-repeat;
+}
+.social.fb {
+    background-position: 0 0;
+}
+.social.twitter {
+    background-position: -100px 0;
+}
+.social.twitter:hover {
+    background-position: -100px -98px;
+}
+.how-it-work.visible .social.fb,
+.show-fb.visible + .fb,
+.social.fb:hover {
+    background-position: 0 -98px;
+}
+.social.youtube {
+    background-position: -200px 0;
+}
+.social.inst {
+    background-position: -300px 0;
+}
+.social.inst:hover {
+    background-position: -300px -97px;
+}
+.social.youtube:hover {
+    background-position: -200px -97px;
+}
+
+
+.cartoon  {
+    width: 93px;
+    height: 142px;
+    background-image: url(http://lea.verou.me/css-4d/img/frames.png);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    animation: sprite 1s steps(9) infinite;
+}
+
+@keyframes sprite {
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+/*============*/
+.size-shower {
+    position: relative;
+    display: inline-block;
+}
+.size-shower span {
+    position: absolute;
+    top: -0.8em;
+    left: 0;
+    opacity: 0;
+    transition: opacity .4s;
+    background: #fff;
+    color: #000;
+}
+.size-shower.visible span {
+    opacity: 1;
+}
+/*============*/
+.gradient {
+    background-color: #808080;
+    border-radius: 150px;
+    box-shadow: -3px -3px 10px 2px rgba(0,0,0,.3) inset, 0 0 0 15px rgba(255, 255, 255, .6) inset, 0 0 0 1px rgba(0,0,0,.5), 2px 2px 10px rgba(0,0,0,.6);
+    
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 40px;
+    list-style: none;
+}
+.gradient.zig-zag {
+    background: linear-gradient(135deg, #ECEDDC 25%, rgba(0, 0, 0, 0) 25%) -50px 0,
+    linear-gradient(225deg, #ECEDDC 25%, rgba(0, 0, 0, 0) 25%) -50px 0,
+    linear-gradient(315deg, #ECEDDC 25%, rgba(0, 0, 0, 0) 25%),
+    linear-gradient(45deg, #ECEDDC 25%, rgba(0, 0, 0, 0) 25%);
+    background-size: 100px 100px;
+    background-color: #EC173A;
+}
+.gradient.bricks {
+    background-color: #c0c0c0;
+    background-image: linear-gradient(335deg, #b00 23px, rgba(0, 0, 0, 0) 23px),
+    linear-gradient(155deg, #d00 23px, rgba(0, 0, 0, 0) 23px),
+    linear-gradient(335deg, #b00 23px, rgba(0, 0, 0, 0) 23px),
+    linear-gradient(155deg, #d00 23px, rgba(0, 0, 0, 0) 23px);
+    background-size: 58px 58px;
+    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
+}
+.gradient.cicada {
+    background-color: #026873;
+    background-image: linear-gradient(90deg, rgba(255,255,255,.07) 50%, rgba(0, 0, 0, 0) 50%), linear-gradient(90deg, rgba(255,255,255,.13) 50%, rgba(0, 0, 0, 0) 50%), linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(255,255,255,.17) 50%), linear-gradient(90deg, rgba(0, 0, 0, 0) 50%, rgba(255,255,255,.19) 50%);
+    background-size: 13px, 29px, 37px, 53px;
+}
+/*============*/
+.bg-origin {
+    position: relative;
+}
+.bg-origin::after {
+    content: attr(data-sss);
+    position: absolute;
+    top: -30px;
+    left: 0;
+}
+/*============*/
+
+.reveal pre {
+    width: 100%;
+}
+.reveal code {
+    font-family: 'sourcecodepro-light' !important;
+}
+
+
+/*.reveal {*/
+    /*scale: -1 1;*/
+/*}*/
